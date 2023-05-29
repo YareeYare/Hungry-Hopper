@@ -80,7 +80,7 @@ export default function Home() {
               <hr/>
               {foodItem !== []
               ?
-              foodItem.filter((item) => (item.CategoryName == data.CategoryName) && (item.name.toLowerCase().includes(search.toLocaleLowerCase()))) 
+              foodItem.filter((item) => (item.CategoryName === data.CategoryName) && (item.name.toLowerCase().includes(search.toLocaleLowerCase()))) 
               .map(filterItems=>{
                   return (
                     <div key={filterItems._id} className='col-12 col-md-6 col-lg-3'>
