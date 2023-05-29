@@ -1,7 +1,17 @@
-import React from 'react'
+import React , {useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
+//import Badge from "@mui/icons-material/Badge";
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+import Badge from '@mui/material/Badge';
+import Modal from '../Modal'
+import Cart from '../screens/Cart'
+import {useCart} from './ContextReducer'
 
 export default function Navbar() {
+
+  const [cartview,setcartview] = useState(false)
+
+    let data = useCart();
 
   const navigate = useNavigate();
 
@@ -41,9 +51,14 @@ export default function Navbar() {
     </div>
       : 
       <div>
-      <div className='btn bg-white text-success mx-2'>
-        My Cart
+      <div className='btn bg-white text-success mx-2' onClick = {()=>{setcartview(true)}} >
+        My Cart {" "}
+        <Badge badgeContent={data.length} color="primary">
+        <LocalMallIcon pill bg='danger'></LocalMallIcon>
+        </Badge>
       </div>
+
+{cartview? <Modal onClose={ ()=>{setcartview(false)} }> <Cart></Cart> </Modal> : null}
 
       <div className='btn bg-white text-danger mx-2' onClick={handleLogout}>
         Logout 
