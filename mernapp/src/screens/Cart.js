@@ -19,21 +19,28 @@ export default function Cart() {
     let response = await fetch("http://localhost:5000/api/auth/orderData", {
       // credentials: 'include',
       // Origin:"http://localhost:3000/login",
+    let response = await fetch("http://localhost:5000/api/myordersData",{
+
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         order_data: data,
+        MyOrdersData: data,
         email: userEmail,
         order_date: new Date().toDateString()
+        orderDate: new Date().toDateString()
       })
     });
     console.log("JSON RESPONSE:::::", response.status)
+    console.log("Order Response", response)
     if (response.status === 200) {
       dispatch({ type: "DROP" })
     }
   }
+
+
   let totalPrice = data.reduce((total, food) => total + food.price, 0)
 
   return (
